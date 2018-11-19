@@ -8,6 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"> 
+
 </head>
 <body>
 
@@ -22,53 +23,59 @@
     <div class="row" style="background-color: #54b7c6;padding:15px 0 15px 0;color:white;">
             <div class="col-lg-4">.</div>
         <div class="col-lg-4">
-            <div class="form-group">
-                <label for="usr">ชื่อ - สกุล:</label>
-                <input type="text" class="form-control" id="usr">
-              </div>
-            
+           <!---- <div class="form-group">
+              <label for="usr">ชื่อ - สกุล:</label>
+              <input type="text" class="form-control" id="usr">
+            </div>
+          -->
+            <form method="POST" action="#">
               <div class="form-group">
-                <label for="pwd">อายุ:</label>
-                <input type="text" class="form-control" id="pwd">
+                <label for="age">อายุ:</label>
+                <input type="text" class="form-control" id="age" name="age" maxlength="2">
               </div> 
               <div class="form-group">
-                <label for="pwd">ส่วนสูง:</label>
-                <input type="text" class="form-control" id="pwd">
+                <label for="height">ส่วนสูง:</label>
+                <input type="text" class="form-control" id="height" placeholder="เซนติเมตร" maxlength="3">
               </div> 
               <div class="form-group">
-                <label for="pwd">น้ำหนัก:</label>
-                <input type="text" class="form-control" id="pwd">
+                <label for="weight">น้ำหนัก:</label>
+                <input type="text" class="form-control" id="weight" placeholder="กิโลกรัม" maxlength="3"> 
               </div> 
               <div class="form-group">
-                <label for="pwd">ความดัน:</label>
-                <input type="text" class="form-control" id="pwd">
+                <label for="pressure">ความดัน:</label>
+                <input type="text" class="form-control" id="pressure" maxlength="3">
               </div> 
-              <div class="form-group">
+             <!--- <div class="form-group">
                 <label for="pwd">น้ำตาลในเลือก:</label>
-                <input type="text" class="form-control" id="pwd">
+                <input type="password" class="form-control" id="sugar">
               </div> 
+            -->
               <div class="form-group">
                 <label class="radio-inline">
-                    <input type="radio" name="optradio" checked>เป็นโรคหัวใจ
+                    <input type="radio" value= "1" name="heart" checked>เป็นโรคหัวใจ
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="optradio">ไม่เป็น
+                    <input type="radio" value="0" name="heart">ไม่เป็น
                   </label>
               </div>
               <div class="form-group">
                     <label class="radio-inline">
-                        <input type="radio" name="optradio1" checked>สูบบุหรี่
+                        <input type="radio" value="1" name="smoke" checked>สูบบุหรี่
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="optradio1">ไม่สูบบุหรี่
+                        <input type="radio" value="0" name="smoke">ไม่สูบบุหรี่
                       </label>
                   </div>
                   <div class="form-group">        
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-floppy-disk"></span> Submit</button>
-                          <button type="submit" class="btn btn-default">reset</button>
+                          <!-- 
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-floppy-disk"></span> Submit</button>
+                           -->
+                           <button type="button" id="btn1" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-floppy-disk"></span> submit</button>
+                          <button type="reset" id="btn2" class="btn btn-default">reset</button>
                         </div>
                       </div>
+                      </form>
         </div>
         <div class="col-lg-4">.</div>
     </div>
@@ -86,16 +93,16 @@
         <div class="modal-body">
           <div class="row" style="border-bottom: 5px dotted rgb(229, 229, 229);">
             <div class="col-*-*">
-              <h1 class="text-center" style="color:rgb(192,0,0);">มีความเสี่ยง</h1>
+              <h1 class="text-center" id ="stroke" style="color:rgb(192,0,0);">มีความเสี่ยง</h1>
             </div>
           </div>
           <div class="row" style="border-bottom: 5px dotted rgb(229, 229, 229);">
             <div class="col-*-*">
-              <h2 class="text-center">BMI : 30 </h2>
+              <h2 class="text-center">BMI : <span id="show_bmi"></span></h2>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-6">
+          <div class="row" id="rec">
+           <!-- <div class="col-lg-6">
                 <h3 class="text-center">คำแนะนำ</h3>
                 <ul>
                   <li>Cardio: ระดับเบาไม่เกิน 1 ชม</li>
@@ -113,7 +120,7 @@
                   <li>เดินเซ ทรงตัวลำบาก</li>
                 </ul>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -123,5 +130,134 @@
   </div><!-- end modal -->
 </div> <!-- main -->
 
+
+<script type="text/javascript">
+
+  $("docuemnt").ready(function(){
+
+    $('#btn1').click(function(){
+      var a = $('#age').val();
+      var h = $('#height').val();
+      var w = $('#weight').val();
+      var p = $('#pressure').val();
+      var hea =$('input[name="heart"]:checked').val();
+      var s =$('input[name="smoke"]:checked').val();
+      var stroke = '';
+      
+      if(a >= 60)
+      {
+        a = 'old';
+      }else{
+        a = 'adult';
+      }
+
+      var H = h*0.01;
+      var bmi = w / (H^2);
+      bmi  = parseFloat(bmi).toFixed(2);
+      var show_bmi = bmi;
+      if(bmi >=23)
+      {
+        bmi = 'H';
+      }else{
+        bmi = 'N';
+      }
+
+      if(p >=140){
+        p = 'Y';
+      }else{
+        p = 'N';
+      }
+      
+      if(a == 'adult')
+      {
+          if(bmi == 'H')
+          {
+                if(hea == 1)
+                {
+                  stroke = 'yes';
+                }else{
+                  if(p == 'Y')
+                  {
+                        if(s == 1)
+                        {
+                          stroke = 'yes';
+                        }else{
+                          stroke = 'no';
+                        }
+                  }else{
+                    stroke = 'no';
+                  }
+                } 
+          }else{
+            stroke = 'no';
+          }
+      }else{// old
+          if(bmi == 'H')
+          {
+            stroke = 'yes';
+          }else{
+            if(hea == 1){
+                if(s == 1){
+                  stroke = 'yes';
+                }else{
+                  stroke = 'no';
+                }
+            }else{
+                if(p == "Y")
+                {
+                      if(s == 1){
+                        stroke = 'yes';
+                      }else{
+                        stroke = 'no';
+                      }
+                }else{
+                  stroke = 'no';
+                }
+            }
+          }
+      }
+      alert(stroke);
+
+      alert('age:'+a+'\nbmi:'+bmi+'\nความดัน:'+p+'\nหัวใจ:'+hea+'\nบุหรี่:'+s);
+      //alert(a+h+w+bmi+p+hea+s);
+      if(stroke=='yes'){
+        stroke='มีความเสี่ยง';
+        $("#rec").html('<div class="col-lg-6"><h3 class="text-center">คำแนะนำ</h3><ul><li>Cardio: ระดับเบาไม่เกิน 1 ชม</li><li>Hight Rep  : 15-20 ครั้ง / เซต</li><li>บุหรี่ : งดสูบ</li><li>อาหาร : เน้นผักและผลไม้ เลี่ยง ทอด มัน หวาน</li></ul></div><div class="col-lg-6"><h3 class="text-center">สังเกตุอาการ</h3><ul><li>ชาหรืออ่อนแรง ที่ใบหน้าและแขนขา</li><li>พูดไม่ชัด ปากเบี้ยว มุมปากตก</li><li>ปวดศีรษะ เวียนศีรษะทันทีทันใด</li><li>เดินเซ ทรงตัวลำบาก</li></ul></div></div>');
+      }
+      else{
+        stroke='ไม่มีความเสี่ยง';
+        $("#rec").html('<div class="col-lg-12"><h3 class="text-center">คำแนะนำ</h3><ul><li>Cardio: ระดับปกติ-หนัก ต่อเนื่อง 30 - 45 นาที (3 - 5 วัน/สัปดาห์)</li><li>Hight Rep  : 15-20 ครั้ง / เซต</li><li>บุหรี่ : หลีกเลี่ยงการสูบ หรือสูดดมควันบุหรี่</li><li>อาหาร : ผัก โปรตีน ผลไม้ หลีกเลี่ยง อาหารทอด ปิ้ง ย่าง หวาน เค็ม</li><li>การพักผ่อน : นอนหลับสนิท 6-8 ชั่วโมง/วัน</li></ul></div>');
+      }
+      $("#stroke").html(stroke);
+      var val_bmi = '';
+      if(bmi== 'H')
+      {
+        val_bmi = 'สูง';
+      }else{
+        val_bmi = 'ปกติ';
+      }
+      $("#show_bmi").html(show_bmi+'('+val_bmi+')');
+    })
+
+     $("#age,#height,#weight,#pressure").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
+  });
+
+</script>
 </body>
 </html> 
