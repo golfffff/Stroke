@@ -31,7 +31,7 @@
             <form method="POST" action="#">
               <div class="form-group">
                 <label for="age">อายุ:</label>
-                <input type="text" class="form-control" id="age" name="age" maxlength="2">
+                <input type="text" class="form-control" id="age" name="age" maxlength="2" placeholder="ปี">
               </div> 
               <div class="form-group">
                 <label for="height">ส่วนสูง:</label>
@@ -43,7 +43,7 @@
               </div> 
               <div class="form-group">
                 <label for="pressure">ความดัน:</label>
-                <input type="text" class="form-control" id="pressure" maxlength="3">
+                <input type="text" class="form-control" id="pressure" maxlength="3" placeholder="ควมดันตัวบน">
               </div> 
              <!--- <div class="form-group">
                 <label for="pwd">น้ำตาลในเลือก:</label>
@@ -51,19 +51,19 @@
               </div> 
             -->
               <div class="form-group">
-                <label class="radio-inline">
-                    <input type="radio" value= "1" name="heart" checked>เป็นโรคหัวใจ
+               โรคหัวใจ <label class="radio-inline">
+                    <input type="radio" value= "1" name="heart" checked>เป็น
                   </label>
                   <label class="radio-inline">
                     <input type="radio" value="0" name="heart">ไม่เป็น
                   </label>
               </div>
               <div class="form-group">
-                    <label class="radio-inline">
-                        <input type="radio" value="1" name="smoke" checked>สูบบุหรี่
+                สูบบุหรี่&nbsp;&nbsp;<label class="radio-inline">
+                         <input type="radio" value="1" name="smoke" checked>สูบ
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" value="0" name="smoke">ไม่สูบบุหรี่
+                          &nbsp;<input type="radio" value="0" name="smoke">ไม่สูบ
                       </label>
                   </div>
                   <div class="form-group">        
@@ -93,7 +93,7 @@
         <div class="modal-body">
           <div class="row" style="border-bottom: 5px dotted rgb(229, 229, 229);">
             <div class="col-*-*">
-              <h1 class="text-center" id ="stroke" style="color:rgb(192,0,0);">มีความเสี่ยง</h1>
+              <h1 class="text-center" id ="stroke" ></h1>
             </div>
           </div>
           <div class="row" style="border-bottom: 5px dotted rgb(229, 229, 229);">
@@ -218,17 +218,19 @@
       }
       //alert(stroke);
 
-      //alert('age:'+a+'\nbmi:'+bmi+'\nความดัน:'+p+'\nหัวใจ:'+hea+'\nบุหรี่:'+s);
+     // alert('age:'+a+'\nbmi:'+bmi+'\nความดัน:'+p+'\nหัวใจ:'+hea+'\nบุหรี่:'+s);
       //alert(a+h+w+bmi+p+hea+s);
       if(stroke=='yes'){
         stroke='มีความเสี่ยง';
         $("#rec").html('<div class="col-lg-6"><h3 class="text-center">คำแนะนำ</h3><ul><li>Cardio: ระดับเบาไม่เกิน 1 ชม</li><li>Hight Rep  : 15-20 ครั้ง / เซต</li><li>บุหรี่ : งดสูบ</li><li>อาหาร : เน้นผักและผลไม้ เลี่ยง ทอด มัน หวาน</li></ul></div><div class="col-lg-6"><h3 class="text-center">สังเกตุอาการ</h3><ul><li>ชาหรืออ่อนแรง ที่ใบหน้าและแขนขา</li><li>พูดไม่ชัด ปากเบี้ยว มุมปากตก</li><li>ปวดศีรษะ เวียนศีรษะทันทีทันใด</li><li>เดินเซ ทรงตัวลำบาก</li></ul></div></div>');
+        $("#stroke").html('<span style="color:rgb(192,0,0);">'+stroke+'</span>');
       }
       else{
         stroke='ไม่มีความเสี่ยง';
-        $("#rec").html('<div class="col-lg-12"><h3 class="text-center">คำแนะนำ</h3><ul><li>Cardio: ระดับปกติ-หนัก ต่อเนื่อง 30 - 45 นาที (3 - 5 วัน/สัปดาห์)</li><li>Hight Rep  : 15-20 ครั้ง / เซต</li><li>บุหรี่ : หลีกเลี่ยงการสูบ หรือสูดดมควันบุหรี่</li><li>อาหาร : ผัก โปรตีน ผลไม้ หลีกเลี่ยง อาหารทอด ปิ้ง ย่าง หวาน เค็ม</li><li>การพักผ่อน : นอนหลับสนิท 6-8 ชั่วโมง/วัน</li></ul></div>');
+        $("#rec").html('<div class="col-lg-12"><h3 class="text-center">คำแนะนำ</h3><ul><li>Cardio: ระดับปกติ-หนัก ต่อเนื่อง 30 - 45 นาที (3 - 5 วัน/สัปดาห์)</li><li>weight training : ปกติ</li><li>บุหรี่ : หลีกเลี่ยงการสูบ หรือสูดดมควันบุหรี่</li><li>อาหาร : ผัก โปรตีน ผลไม้ หลีกเลี่ยง อาหารทอด ปิ้ง ย่าง หวาน เค็ม</li><li>การพักผ่อน : นอนหลับสนิท 6-8 ชั่วโมง/วัน</li></ul></div>');
+        $("#stroke").html('<span style="color:#06d6a0;">'+stroke+'</span>');
       }
-      $("#stroke").html(stroke);
+     // $("#stroke").html('<span style="color:rgb(192,0,0);">'+stroke+'</span>');
       var val_bmi = '';
       if(bmi== 'H')
       {
